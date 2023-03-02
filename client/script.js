@@ -10,7 +10,7 @@
 */
 
 // CODE HERE
-
+let sayHelloButton = document.querySelector("#say-hello-button");
 
 // PROBLEM 2
 /*
@@ -20,6 +20,12 @@
 */
 
 // CODE HERE
+function changeColor (event) {
+    event.target.style.backgroundColor = "black"
+    event.target.style.color = "white"
+}
+//changeColor(sayHelloButton)
+sayHelloButton.addEventListener("mouseover", changeColor)
 
 
 // PROBLEM 3
@@ -32,6 +38,12 @@
 */
 
 // CODE HERE
+function changeBack (event) {
+    event.target.style.backgroundColor = "#EFEFEF"
+    event.target.style.color = "black"
+}
+//changeColor(sayHelloButton)
+sayHelloButton.addEventListener("mouseout", changeBack)
 
 
 // PROBLEM 4
@@ -53,7 +65,7 @@ const sayHello = () => {
 // DO NOT EDIT FUNCTION
 
 // CODE HERE
-
+sayHelloButton.addEventListener("click", sayHello)
 
 // PROBLEM 5 
 /*
@@ -68,6 +80,14 @@ const sayHello = () => {
 
 const ohMy = () => {
     // YOUR CODE HERE
+    axios.get('http://localhost:3000/animals').then((result)=> {
+        console.log(result.data)
+        for (let i = 0; i < result.data.length; i++) {
+            let p = document.createElement("p")
+            p.textContent = result.data[i]
+            document.body.appendChild(p)
+        }
+    })
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
@@ -86,9 +106,15 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
     We'll be updating this function in the next problem.
 */
 
-const repeatMyParam = () => {
+const repeatMyParam = (param) => {
     //YOUR CODE HERE
+    axios.get(`http://localhost:3000/repeat/${param}`).then((result)=>{
+    console.log(result.data)
+    document.getElementById("repeat-text").textContent = result.data
+    document.getElementById("repeat-text").style.display = "block"
+    })
 }
+document.getElementById("repeat-button").addEventListener("click", repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -113,6 +139,12 @@ const repeatMyParam = () => {
 */
 
 // CODE HERE
+function func () {
+    axios.get('http://localhost:3000/query-test?favFood=Pizza&?favFav=none').then((result)=>{
+        console.log(result.data)
+    })
+}
+document.getElementById("query-button").addEventListener("click", func)
 
 
 
